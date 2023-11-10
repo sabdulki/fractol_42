@@ -6,27 +6,67 @@
 /*   By: sabdulki <sabdulki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 18:59:37 by sabdulki          #+#    #+#             */
-/*   Updated: 2023/11/02 19:38:25 by sabdulki         ###   ########.fr       */
+/*   Updated: 2023/11/10 16:42:21 by sabdulki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	ft_error_mlx(t_info *d)
+size_t	ft_strlen(const char *str)
 {
-	free_info_struct(d);
-	ft_printf("problems with initialization of the t_info struct");
-	exit(0);
+	size_t	count;
+
+	count = 0;
+	while (str[count])
+		count++;
+	return (count);
 }
 
-int	close_window(t_info *data)
+size_t	check_d(const char *str)
 {
-	ft_printf("	The program has been successfully closed");
-	mlx_destroy_image(data->mlx, data->img.img_ptr);
-	mlx_destroy_window(data->mlx, data->mlx_win);
-	free_info_struct(data);
-	exit(0);
-	return (0);
+	size_t	i;
+	size_t	dot_count;
+	size_t	minus_count;
+
+	i = 0;
+	dot_count = 0;
+	minus_count = 0;
+	while (str[i])
+	{
+		if (str[i] == '.')
+			dot_count++;
+		if (str[i] == '-')
+			minus_count++;
+		i++;
+	}
+	if ((minus_count > 0 && str[0] != '-' ) || \
+		(dot_count > 0 && (str[i - 1] == '.' || str[0] == '.')) || \
+		(dot_count > 1 || minus_count > 1) || \
+		(minus_count && str[1] == '0' && str[2] != '.') || \
+		(str[0] == '0' && str[1] != '.'))
+		return (0);
+	return (1);
+}
+
+size_t	is_d(const char *str)
+{
+	size_t	i;
+	size_t	check;
+
+	check = check_d(str);
+	if (check == 0)
+		return (0);
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '-' || str[i] == '.')
+			i++;
+		if (str[i] >= '0' && str[i] <= '9')
+			i++;
+		else
+			return (0);
+	}
+	return (1);
 }
 
 int	ft_strncmp(char *s1, char *s2, size_t n)
@@ -38,44 +78,41 @@ int	ft_strncmp(char *s1, char *s2, size_t n)
 	res = 0;
 	if (n == 0)
 		return (0);
-	while (i < n && (s1[i] || s2[i]))
+	while (i < n || (s1[i] || s2[i]))
 	{
 		if (s1[i] != s2[i])
-		{
-			res = (unsigned char)s1[i] - (unsigned char)s2[i];
-			return (res);
-		}
+			return (0);
 		i++;
 	}
 	if (n != i)
-		return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-	return (0);
+		return (0);
+	return (1);
 }
 
 double	atodbl(char *s)
 {
 	long	integer_part;
 	double	fractional_part;
-	double	pow;
-	int		sign;
+	double	decimal_scale;
+	int		minus;
 
 	integer_part = 0;
 	fractional_part = 0;
-	sign = +1;
-	pow = 1;
+	minus = +1;
+	decimal_scale = 1;
 	while ((*s >= 9 && *s <= 13) || 32 == *s)
 		++s;
 	while ('+' == *s || '-' == *s)
 		if ('-' == *s++)
-			sign = -sign;
+			minus *= -1;
 	while (*s != '.' && *s)
 		integer_part = (integer_part * 10) + (*s++ - 48);
 	if ('.' == *s)
 		++s;
 	while (*s)
 	{
-		pow /= 10;
-		fractional_part = fractional_part + (*s++ - 48) * pow;
+		decimal_scale /= 10;
+		fractional_part = fractional_part + (*s++ - 48) * decimal_scale;
 	}
-	return ((integer_part + fractional_part) * sign);
+	return ((integer_part + fractional_part) * minus);
 }

@@ -6,31 +6,34 @@
 /*   By: sabdulki <sabdulki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 16:24:25 by sabdulki          #+#    #+#             */
-/*   Updated: 2023/11/02 19:36:52 by sabdulki         ###   ########.fr       */
+/*   Updated: 2023/11/10 17:00:43 by sabdulki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int main (int argc, char**argv)
+int	main(int argc, char**av)
 {
-	t_info *data;
-	char *name;
+	t_info	*data;
+	int		is_mandelbrot;
+	int		is_julia;
 
-	if (((argc != 2) && (!ft_strncmp(argv[1], "mandelbrot", 10)))
-		|| ((argc != 4) && (!ft_strncmp(argv[1], "julia" , 5))))
+	if (argc < 2)
+		print_err();
+	is_mandelbrot = ft_strncmp(av[1], "mandelbrot", ft_strlen(av[1])) == 1;
+	is_julia = ft_strncmp(av[1], "julia", ft_strlen(av[1])) == 1;
+	if ((is_mandelbrot == 1 && argc != 2) || (is_julia == 1 && argc != 4) || \
+		(is_julia && (is_d(av[2]) == 0 || is_d(av[3]) == 0)) || \
+		(!is_julia && !is_mandelbrot))
+		print_err();
+	data = init_info_struct(av[1]);
+	if (is_mandelbrot == 1)
+		data->is_mandel = 1;
+	if (is_julia == 1)
 	{
-		ft_printf("INVALID INPUT\nYour options are: 'mandelbrot', 'julia'.");
-		ft_printf("Use 2 parametrs(x,y) for julia from -1 to 1.\n");
-		ft_printf("Example 1: ./fractol mandelbrot\nExample 2: ./fractol julia -0.8 0.18");
-		exit(0);
-	}
-	name = argv[1];
-	data = init_info_struct(name);
-	if (!ft_strncmp(data->title, "julia", 5))
-	{
-		data->julia_x = atodbl(argv[2]);
-		data->julia_y = atodbl(argv[3]);
+		data->is_julia = 1;
+		data->julia_x = atodbl(av[2]);
+		data->julia_y = atodbl(av[3]);
 	}
 	draw_fractol(data);
 	hooks(data);
