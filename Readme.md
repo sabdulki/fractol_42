@@ -7,7 +7,11 @@ The programm renders Mandelbrot and Julia fractols using [mlx](https://harm-smit
 The program was written as part of a [42 programming school](https://42.fr/en/homepage/) project, 
 in particular [42 Abu Dhabi school](https://42abudhabi.ae/).
 
-<!-- ## Table of Contents -->
+## Table of Contents
+- [Installation && How to compile](#installation-&&-how-to-compile)
+- [Features](#features)
+- [Buttons](#buttons)
+- [Examples](#some-examples)
 
 <!-- # Description
 What the fractol is? Why there are different fractols in the world? 
@@ -59,10 +63,11 @@ And the most important - the mouse **wheel**. Try to zoom in and zoom out - you'
 The programm suppoused to zoom infinetely, so try it out :wink:
 
 `Disclamer` 
-Its not recomended to use features described above while rendering Julia fractol with mouse movement. It could crash the programm or make it slowlier.
+It's **not recomended** to use features described above **while rendering** Julia fractol **with mouse movement**. It could crash the programm or make it a bit slowly.
 
-
+## Some examples
 <!-- ![Alt Text - description of the image](url to the image you want to include) -->
 ![mandelbrot](./imgs/mandelbrot.png)
 ![mandelbrot zoomed](./imgs/mandelbrot-zoomed.png)
 ![julia](./imgs/julia%20-0.8%200.18.png)
+![julia](./imgs/julia.png)
