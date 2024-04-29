@@ -6,11 +6,11 @@
 /*   By: sabdulki <sabdulki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 17:20:19 by sabdulki          #+#    #+#             */
-/*   Updated: 2023/11/10 18:09:54 by sabdulki         ###   ########.fr       */
+/*   Updated: 2024/04/29 17:24:28 by sabdulki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "../src/fractol.h"
 
 int	hooks(t_info *d)
 {
@@ -18,6 +18,7 @@ int	hooks(t_info *d)
 	mlx_hook (d->mlx_win, 04, 1L << 2, hook_zoom, d);
 	mlx_hook (d->mlx_win, 17, 1L << 17, close_window, d);
 	mlx_hook (d->mlx_win, 03, 1L << 0, color_hooks, d);
+
 	return (0);
 }
 
@@ -86,13 +87,3 @@ int	hook_zoom(int btn, int x, int y, t_info *d)
 	}
 	return (0);
 }
-
-// mlx_hook(d->mlx_win, 6, 1L<<6, julia_moves, d);
-
-// int julia_moves(int x, int y, t_info* d)
-// {
-// 	d->julia_x = change_scale(x, -2, 2, WIDTH) * d->zoom + d->shift_x;
-// 	d->julia_y = change_scale(y, 2, -2, HEIGHT) * d->zoom + d->shift_y;
-// 	draw_fractol(d);
-// 	return (0);
-// }

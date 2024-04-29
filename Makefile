@@ -6,39 +6,54 @@
 #    By: sabdulki <sabdulki@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 18:03:10 by sabdulki          #+#    #+#              #
-#    Updated: 2023/11/10 18:09:18 by sabdulki         ###   ########.fr        #
+#    Updated: 2024/04/29 17:26:03 by sabdulki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = fractol.c hooks.c init_info.c render.c math.c utils.c utils_messages.c
+SRCS =  ./src/fractol.c \
+		./src/init_info.c \
+		./src/render.c \
+		./src/math.c \
+		./src/utils.c \
+		./src/utils_messages.c
+
+MAND_SRCS = ./mandatory/hooks.c
+BONUS_SRCS = ./bonus/hooks_jm.c
+
 OBJ = $(SRCS:.c=.o)
+MAND_OBJ = $(MAND_SRCS:.c=.o)
+BONUS_OBJ = $(BONUS_SRCS:.c=.o)
 
 CC = cc
-CFLAGS =  -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 
-MLX = cd mlx && make
+# MLX = cd src/mlx && make
 
-PRINTF = ./ft_printf/libftprintf.a 
+PRINTF = src/ft_printf/libftprintf.a 
 
 NAME = fractol
 
-$(NAME): $(OBJ)
-	$(MLX)
-	cd ft_printf && make
-	$(CC) $(CFLAGS) $(PRINTF) $(OBJ) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+$(NAME): $(OBJ) $(MAND_OBJ)
+	cd mlx && make
+	cd src/ft_printf && make
+	$(CC) $(CFLAGS) $(PRINTF) $(OBJ) $(MAND_OBJ) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 all: $(NAME)
 
+bonus: $(OBJ) $(BONUS_OBJ)
+	cd mlx && make
+	cd src/ft_printf && make clean
+	$(CC) $(CFLAGS) $(PRINTF) $(OBJ) $(BONUS_OBJ) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	
 clean : 
-	rm -f fractol $(OBJ)
-	cd ft_printf && make clean
+	rm -f $(OBJ) $(MAND_OBJ) $(BONUS_OBJ)
+	cd src/ft_printf && make clean
 	$(MAKE) clean -C mlx
 
 fclean : clean
 	rm -f $(NAME)
-	cd ft_printf && make fclean
+	cd src/ft_printf && make fclean
 
 re : fclean all
-	cd ft_printf && make fclean && make all
 
 .PHONY : all clean fclean re bonus

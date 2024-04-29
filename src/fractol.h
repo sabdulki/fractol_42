@@ -6,14 +6,14 @@
 /*   By: sabdulki <sabdulki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 18:18:05 by sabdulki          #+#    #+#             */
-/*   Updated: 2023/11/10 18:11:13 by sabdulki         ###   ########.fr       */
+/*   Updated: 2024/04/29 17:25:38 by sabdulki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-# include "mlx/mlx.h" 
+# include "../mlx/mlx.h" 
 # include "./ft_printf/ft_printf.h"
 # include <math.h>
 # include <stdio.h>
@@ -90,5 +90,5 @@ size_t			is_d(const char *str);
 double			atodbl(char *s);
 double			scale(double unscaled_num, double new_min,
 					double new_max, double old_max);
-
+int 			julia_moves(int x, int y, t_info* d);
 #endif
