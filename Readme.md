@@ -20,7 +20,8 @@ Whats the difference between Mandelbrot and Julia? What paramentrs the Julia nee
 ## Installation && How to compile
 ```bash
 git clone https://github.com/sabdulki/fractol_42.git
-
+```
+```bash
 make re
 ```
 For Mandelbrot farctol please use:
@@ -39,7 +40,7 @@ Instaed of `x` and `y` please type any numbers betwen 2 and -2 for both paramene
 -  0.375385 0.369213
 - -0.553846 -0.516923
 - -0.800000 -0.190769
-And whatether you want from 2 to -2.
+- And whatether you want from 2 to -2.
 
 ## Features
 
