@@ -57,9 +57,11 @@ Hover the mouse over the programm window and you'll see a kind of magic :sparkle
 Don't hesitate to press some buttons:
 - 'W': the body of fractol becomes white
 - 'B': the body of fractol becomes black
-- 1 - 4: the fractol chages the colours :one: :two: :tree: :four:
-Don't forget about the arrows: press up, down, left, right - the image will be shifting :arrow_up: :arrow_down: :arrow_left: :arrow_right:
-And the most important - the mouse **wheel**. Try to zoom in and zoom out - you'd like it! :cyclone:
+- 1 - 4: the fractol chages the colours :one: :two: :three: :four:
+
+- Don't forget about the arrows: press up, down, left, right - the image will be shifting :arrow_up: :arrow_down: :arrow_left: :arrow_right:
+- And the most important - the mouse wheel. Try to **zoom in** and **zoom out** - you'd like it! :cyclone:
+
 The programm suppoused to zoom infinetely, so try it out :wink:
 
 `Disclamer` 
