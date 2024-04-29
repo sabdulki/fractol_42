@@ -22,6 +22,7 @@ Whats the difference between Mandelbrot and Julia? What paramentrs the Julia nee
 git clone https://github.com/sabdulki/fractol_42.git
 ```
 ```bash
+cd fractol_42
 make re
 ```
 For Mandelbrot farctol please use:
